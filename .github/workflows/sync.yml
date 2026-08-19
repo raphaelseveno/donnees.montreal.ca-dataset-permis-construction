@@ -1,0 +1,36 @@
+name: Sync Montréal permis-construction dataset to Supabase
+
+on:
+  schedule:
+    # Every day at 10:23 UTC (06:23 Montréal in summer, 05:23 in winter).
+    - cron: "23 10 * * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Force a full reload even if the CSV is unchanged"
+        type: boolean
+        default: false
+
+concurrency:
+  group: permis-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run sync
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+          FORCE_SYNC: ${{ github.event.inputs.force || 'false' }}
+        run: python sync.py
