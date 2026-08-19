@@ -1,5 +1,7 @@
 # Montréal « Permis de construction » → Supabase
 
+[![Sync status](https://github.com/raphaelseveno/donnees.montreal.ca-dataset-permis-construction/actions/workflows/sync.yml/badge.svg)](https://github.com/raphaelseveno/donnees.montreal.ca-dataset-permis-construction/actions/workflows/sync.yml)
+
 Daily sync of the CSV from the open-data portal
 [donnees.montreal.ca/dataset/permis-construction](https://donnees.montreal.ca/dataset/permis-construction)
 into a Supabase (Postgres) database.
