@@ -1,4 +1,4 @@
-name: Sync Montréal permis-construction dataset to Supabase
+name: Sync permis-construction dataset to Supabase
 
 on:
   schedule:
